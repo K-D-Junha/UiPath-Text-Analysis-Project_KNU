@@ -1,0 +1,114 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="TodayStockIndex" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="567,2513" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/word" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Word</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="MakeAnalysisReport" sap:VirtualizedContainerService.HintSize="547,2453" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="TopDT" />
+      <Variable x:TypeArguments="ui:Browser" Name="MyBrw" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Delete ContinueOnError="True" sap:VirtualizedContainerService.HintSize="505,22" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[String.Format( &quot;{0} 의견분석 보고서.docx&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" />
+    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[String.Format( &quot;{0} 의견분석 보고서.docx&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="505,157" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="이번달의 의견분석 보고서.docx" />
+    <p:WordApplicationScope DisplayName="Word Application Scope" FilePath="[String.Format( &quot;{0} 의견분석 보고서.docx&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" sap:VirtualizedContainerService.HintSize="505,2102" sap2010:WorkflowViewState.IdRef="WordApplicationScope_1">
+      <p:WordApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WordDocument">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WordDocument" Name="WordDocumentScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,1993" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Int32" Name="Index" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="WordReplaceText_2" Replace="Galaxy Note9" Search="&lt;product&gt;" />
+            <p:WordReplaceText Found="{x:Null}" DisplayName="Replace Text" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="WordReplaceText_1" Replace="[String.Format( &quot;{0}&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" Search="&lt;REPORTTIME&gt;" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_1" PictureAltText="all" PicturePath="all_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_2" PictureAltText="time_volumn" PicturePath="time_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_3" PictureAltText="ai" PicturePath="ai_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_4" PictureAltText="audio" PicturePath="audio_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_5" PictureAltText="battery" PicturePath="battery_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_6" PictureAltText="button" PicturePath="button_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_7" PictureAltText="camera" PicturePath="camera_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_8" PictureAltText="mic" PicturePath="mic_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_9" PictureAltText="pen" PicturePath="pen_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_10" PictureAltText="screen" PicturePath="screen_result.png" />
+            <p:WordReplacePicture DisplayName="Replace Picture" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="WordReplacePicture_11" PictureAltText="sensor" PicturePath="sensor_result.png" />
+            <ui:Delete ContinueOnError="True" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Delete_2" Path="[String.Format( &quot;{0} 의견분석 보고서.pdf&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" />
+            <p:WordExportToPdf DisplayName="Export to PDF" FilePath="[String.Format( &quot;{0} 의견분석 보고서.pdf&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="WordExportToPdf_1" />
+            <ui:SendOutlookMail Account="phs8770@naver.com" AttachmentsCollection="{x:Null}" Bcc="{x:Null}" Body="[String.Format( &quot;{0} 의견분석 보고서.pdf&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" Cc="{x:Null}" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" IsBodyHtml="False" IsDraft="False" MailMessage="{x:Null}" SentOnBehalfOfName="{x:Null}" Subject="[String.Format( &quot;{0} 의견분석 보고서.pdf&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))]" TimeoutMS="{x:Null}" To="hyse8770@gmail.com">
+              <ui:SendOutlookMail.Files>
+                <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                  <InArgument x:TypeArguments="x:String">
+                    <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="String.Format( &quot;{0} 의견분석 보고서.pdf&quot;, DateTime.Now.ToString(&quot;yyyy-MM&quot;))">
+                      <mva:VisualBasicValue.Result>
+                        <OutArgument x:TypeArguments="x:String" />
+                      </mva:VisualBasicValue.Result>
+                    </mva:VisualBasicValue>
+                  </InArgument>
+                </scg:List>
+              </ui:SendOutlookMail.Files>
+            </ui:SendOutlookMail>
+          </Sequence>
+        </ActivityAction>
+      </p:WordApplicationScope.Body>
+    </p:WordApplicationScope>
+  </Sequence>
+</Activity>
